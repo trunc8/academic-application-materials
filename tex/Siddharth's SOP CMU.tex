@@ -1,0 +1,135 @@
+\documentclass[12pt]{article}
+
+% Space between paragraphs
+\setlength{\parskip}{3pt plus1pt}
+
+% Margin widths, Header separation, and Footer skip
+%\usepackage[left=1in,
+%			right=1in,
+%			top=0.8in,
+%			bottom=0.8in,
+%			headsep=.15in,
+%			footskip=.25in]{geometry}
+\usepackage[margin=1in]{geometry}
+%\usepackage[margin=1in, headsep=.2in, footskip=.2in]{geometry}
+
+% Send footnote to bottom of page and not glued to text
+%\usepackage[bottom]{footmisc}
+
+% Insert image
+\usepackage{graphicx}
+
+% colors
+\usepackage[usenames, dvipsnames]{xcolor}
+
+% For urls
+\usepackage[colorlinks=true]{hyperref}
+
+\hypersetup{
+	citecolor=magenta,
+	linkcolor=Mahogany,
+	urlcolor=Blue
+}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+%\rhead{Siddharth Saha}
+%\lhead{Stanford MS in Mechanical Engineering}
+%\lhead{Siddharth Saha}
+%\rhead{CMU MSR}
+\rhead{Siddharth Saha}
+\lhead{Statement of Purpose for MSR/MRSD, Carnegie Mellon}
+\rfoot{Page \thepage}
+
+\usepackage{etoolbox}%
+
+\newcommand{\makefootnotelist}[1]{%
+	\parbox{0.8\textwidth} {%
+		\footnotesize{%
+			\renewcommand*{\do}[1]{##1\\}%
+			\dolistcsloop{#1}}}}%
+\newcommand{\fancyfootnote}[1]{%
+	\footnotemark{}%
+	\def\listname{footlist\thepage}%
+	\def\n{$^{\the\numexpr\value{footnote}}$}
+	\ifcsdef{\listname}%
+	{\listcseadd{\listname}{\n\ #1}}%
+	{\csedef{\listname}{}%
+		\listcseadd{\listname}{\n\ #1}}%
+	\fancypagestyle{fancyfootnote}{%
+		\fancyfoot[L]{\makefootnotelist{\listname}}%
+		\fancyfoot[R]{Page \thepage}%
+		\fancyfoot[C]{}%
+	}\thispagestyle{fancyfootnote}}%
+
+\fancypagestyle{plain}{%
+	\fancyfoot[C]{\thepage}
+}
+
+\begin{document}
+
+%\begin{center}
+
+%{\Large Statement of Purpose} \\[.3in]
+%{\large of Siddharth Saha (MSME applicant for Fall—2022)}
+%{\Large Statement of Purpose} \\[.08in]
+%{\large of Siddharth Saha (MSR applicant for Fall—2022)}
+%\end{center}
+%\vspace{-0.08in}
+
+%\vspace*{.5in}
+
+%\footnote{Memory of motion} 
+%\fancyfootnote{Memory of motion project}
+%\fancyfootnote{Memory of motion project --- University of Oxford, University of Edinburgh, Max-Planck Institute et al.}
+I am passionate about robotics research in three primary areas: legged locomotion, task \& motion planning, and optimization. My ambition is to advance robotics capabilities in unstructured environments while working in industrial R\&D. To this end, I aim to pursue a Master’s in Robotics at Carnegie Mellon.
+
+My motivation to pursue robotics originated while interacting with a quadruped in Hiroshima University’s Cybernetics lab in summer 2019. Noticing a void in legged robotics back at IIT Bombay, I founded an institute-funded \textbf{quadruped team} tackling the \href{https://rrl.robocup.org/}{RoboCup Rescue League}. Leading our 15-membered team, I mentored recruits with ROS and programming skills. We applied our understanding of impedance control and contact schedule optimization to enable our simulated quadruped climb steep inclines using a modified Bézier curve gait. During the pandemic, we adapted and ensured work continuity via ROS simulations. Later in 2020, I attended the \href{https://memory-of-motion.github.io/summer-school/}{MEMMO Summer School} on “Advanced methods for planning \& control of legged robots.” As the only undergraduate, I enjoyed interacting with graduate students. The lectures exposed me to Bellman’s equations, collocation methods, and optimal control for the first time.
+
+As I learned more about legged robots, I became more invested in multimodality during \textbf{legged locomotion}: What gait patterns could be more energy efficient than their wheeled counterparts? How does the control generalize over complex foothold constraints, like steep stairs, slippery terrain, and sharp rocks? Can we design perception/sensing algorithms to infer foothold constraints from the world in real-time? Can Atlas (the biped) extend its arms bracing against impact or reflexively grip a rigid object for robustness against falls? Multimodality is essential for resilience in robotics, as demonstrated by the \href{https://www.darpa.mil/program/darpa-subterranean-challenge}{DARPA SubT Challenge} in September 2021. My interest in multimodal legged locomotion aligns with the vision of the Robomechanics Lab under Prof. Aaron Johnson — to study robots not under lab conditions but in challenging real-world environments.
+
+My second area of interest, \textbf{task planning}, spans two types of problems: (1) Non-exploratory, well-defined tasks (like filling a cup from a tap after fetching it from a shelf across the kitchen) (2) Exploratory, abstract tasks (like searching for lost keys inside a house). In the latter problem, the mobile robot may have to open a drawer, search underneath a heap of clothes, twist the doorknob to search another room, and so on. Instead of passively understanding the environment, the robot “actively” interacts to learn more. What decision-making algorithms can solve such task planning problems? How to sync motion between the manipulator and mobile base? How should the robot deal with uncertainty or a dynamic object? I am intrigued by these questions.
+
+I investigated the last question on dynamic agents in my Bachelor’s thesis (under \textbf{Prof. Leena Vachhani}). Its aim was “Mapping Regions of Dynamic Activity \& Building Dynamic-free 3D Occupancy Maps.” This problem’s significance is that the robot can plan differently around static and dynamic regions. Literature surveys revealed that existing algorithms utilize space-inefficient point-cloud maps. Leveraging my study of octree-based maps, I implemented a novel clustering algorithm on top of the OctoMap package and accomplished our problem objective in ROS/Gazebo simulations. More recently, during my \href{https://summerofcode.withgoogle.com/archive/}{Google Summer of Code} (GSoC) 2021 at JdeRobot, I focused on behavior tree based navigation planning. Consequently, \href{https://roscon.ros.org/world/2021/}{ROS Conference 2021} selected my Bachelor’s thesis and my GSoC project among 25 lightning talk presentations this year.
+
+My third area of interest is \textbf{optimization}, both as an applied mathematics problem and utilizing it in my previous interests (like trajectory, pose graph, and policy optimizations). Having studied this topic closely in courses, I  implemented it in competitions (like \href{https://f1tenth.org/iros2020.html}{F1/10$^{th}$}) and projects (like Multi-robot capture of non-adversarial target using MILP). From nuclear warhead design to optimizing business expenses, the ubiquity of optimization drives my love for this topic. I wish to be a part of breakthroughs in this field that remove computational bottlenecks from real-time decision-making.
+
+I am inspired by the ongoing work in several CMU labs at the union of my last two interests — the \textbf{Robotic Exploration Lab} under Prof. Zac Manchester (trajectory optimization and exploration), the \textbf{Robomechanics Lab} under Prof. Aaron Johnson (interaction between robot and environment), and the \textbf{Search-based Planning Lab} (decision making).
+
+My robotics courses at IIT Bombay (like Advanced mobile robotics, ML/RL/Vision, Machine design) provide the foundation to tackle CMU’s rigorous MSR curriculum. While enjoying graduate-level robotics courses, I also secured a perfect GPA in my final year. The course “Design of Mechatronic Systems” (under \textbf{Prof. Prasanna Gandhi}, Fall 2020) furthered my intuition in robotics system design. In this, despite the difficult challenge posed by the COVID-19 lockdown, I built a two-wheeled self-balancing bot at home. Constrained in mechanical parts, I used a phone box as the bot’s chassis and other home-available equipment, while the instructor sent a microcontroller and sensors.
+
+Subsequently, under Prof. Gandhi, I investigated equilibria states of a \textbf{flexible inverted pendulum}. During this project, I learned formal research methodology, i.e., hypothesis proposal, mathematical backing, experimentation, observation data analysis, and preliminary conclusions. My first round of experiments was not in line with the simulations. Undeterred by this failure, I redid the analysis, identified corrections and conducted another round of experiments. The new observations perfectly aligned with our predictions. This experience introduced me to the iterative nature of research.
+
+Rounding off my technical knowledge and research experiences, I have also honed my soft skills as the Electronics \& Robotics Club convener while organizing competitions, giving institute talks, and mentoring juniors interested in robotics. Leading and establishing the quadruped team took me through a steep learning curve in project management — proposing the budget to a panel of professors, conducting recruitments, allocating expenses, and planning work direction.
+
+I am excited about exploring my interests in legged robots, planning, and optimization in graduate school and hope to research them under Prof. Johnson and Prof. Manchester. I believe that Carnegie Mellon’s distinguished peer group would further my skills and prepare me for my research and career ambitions. Thank you for considering my application, and I look forward to contributing positively to the MSR program at Carnegie Mellon.
+
+
+
+
+\setlength{\parskip}{0pt plus1pt}
+%%%% V1 %%%%%
+%\vspace{5pt}
+%Sincerely yours,\par
+%\vspace{10pt}
+%\rule{9em}{0.5pt}\par
+%Mumbai, November 27, 2021
+
+%%%% V2 %%%%%
+%\vspace{5pt}
+%\noindent Sincerely yours, \par
+%\vspace{15pt}
+%\noindent\rule{12em}{0.5pt}\par
+%\noindent Mumbai, November 27, 2021
+
+%%%% V2 %%%%%
+\vspace{10pt}
+\noindent Sincerely yours, \par
+\includegraphics[width=0.07\linewidth]{sign.jpeg}\par
+\noindent Siddharth Saha \par
+%\vspace{5pt}
+\noindent Mumbai, November 30, 2021
+
+
+
+\end{document}
